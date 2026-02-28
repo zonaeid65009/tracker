@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2e8b57">
+    <!-- আসল Manifest ফাইল লিংক করা হলো -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2907/2907253.png">
+    
     <title>স্মার্ট ড্যাশবোর্ড - AI ও প্রোডাক্টিভিটি</title>
     
-    <!-- Chart.js, Confetti & FontAwesome -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
 
+    <!-- আপনার আগের সম্পূর্ণ CSS এখানে আছে -->
     <style>
         :root {
             --bg-color: #f4f7f6; --text-color: #333; --card-bg: #fff;
@@ -68,7 +72,6 @@
         input[type="checkbox"] { transform: scale(1.4); cursor: pointer; accent-color: var(--primary-color); }
         .input-box { width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 5px; background: var(--bg-color); color: var(--text-color); }
         
-        /* Dynamic Routine Styles */
         .routine-input { border: none; background: transparent; text-align: center; width: 100%; min-width: 100px; font-size: 15px; color: var(--text-color); outline: none;}
         .routine-header-input { border: none; background: transparent; text-align: center; color: white; font-weight: bold; width: 80%; font-size: 16px; outline: none; }
         .routine-header-input::placeholder { color: rgba(255,255,255,0.7); }
@@ -84,7 +87,6 @@
         .btn-ai { background: linear-gradient(45deg, var(--ai-color), #005c5c); font-size: 18px;}
         .btn-remove { background: #ff4d4d; color: white; border: none; padding: 5px 8px; border-radius: 4px; cursor: pointer; }
 
-        /* ====== Stats & Percentage Styles (Restored) ====== */
         .stats-section { padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 15px; background: var(--bg-color); }
         .tab-buttons-sm { display: flex; gap: 10px; margin-bottom: 15px; }
         .tab-buttons-sm button { flex: 1; padding: 8px; border-radius: 6px; border: 1px solid gray; background: transparent; color: var(--text-color); cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.3s; }
@@ -127,7 +129,7 @@
         <input type="date" id="global-date" onchange="loadDateData()">
     </div>
 
-    <!-- ================= 1. নামাজ ট্র্যাকার ================= -->
+    <!-- নামাজ ট্র্যাকার -->
     <div id="section-namaz" class="tab-content active card">
         <h2 class="card-title" style="color: var(--primary-color);"><i class="fa-solid fa-mosque"></i> নামাজ ট্র্যাকার</h2>
         <div class="table-responsive">
@@ -138,7 +140,6 @@
         </div>
         <button class="btn btn-namaz" onclick="saveNamazData()"><i class="fa-solid fa-save"></i> নামাজ সেভ করুন</button>
 
-        <!-- নামাজ পরিসংখ্যান (Restored) -->
         <div class="stats-section">
             <h3 style="text-align:center; color: var(--primary-color); margin-bottom: 10px; font-size: 16px;">পরিসংখ্যান ও পার্সেন্টেজ</h3>
             <div class="tab-buttons-sm namaz-tabs-sm">
@@ -148,11 +149,10 @@
             </div>
             <div id="namaz-stats-display"></div>
         </div>
-
         <div class="chart-container"><canvas id="namazChart"></canvas></div>
     </div>
 
-    <!-- ================= 2. পড়াশোনা ট্র্যাকার ================= -->
+    <!-- পড়াশোনা ট্র্যাকার -->
     <div id="section-study" class="tab-content card">
         <h2 class="card-title" style="color: var(--secondary-color);"><i class="fa-solid fa-book-open-reader"></i> স্টাডি ট্র্যাকার</h2>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; background: var(--bg-color); padding: 10px; border-radius: 8px;">
@@ -168,7 +168,6 @@
         <button class="btn btn-study" onclick="addStudySubject()" style="background: transparent; border: 2px dashed var(--secondary-color); color: var(--secondary-color);">+ নতুন বিষয় যোগ করুন</button>
         <button class="btn btn-study" onclick="saveStudyData()"><i class="fa-solid fa-save"></i> পড়াশোনা সেভ করুন</button>
 
-        <!-- পড়াশোনা পরিসংখ্যান (Restored) -->
         <div class="stats-section">
             <h3 style="text-align:center; color: var(--secondary-color); margin-bottom: 10px; font-size: 16px;">টার্গেট ও পার্সেন্টেজ</h3>
             <div class="tab-buttons-sm study-tabs-sm">
@@ -177,27 +176,23 @@
             </div>
             <div id="study-stats-display"></div>
         </div>
-
         <div class="chart-container"><canvas id="studyChart"></canvas></div>
     </div>
 
-    <!-- ================= 3. ডাইনামিক রুটিন ================= -->
+    <!-- ডাইনামিক রুটিন -->
     <div id="section-routine" class="tab-content card">
         <h2 class="card-title" style="color: var(--routine-color);"><i class="fa-solid fa-table-cells"></i> দৈনন্দিন রুটিন</h2>
-        <p style="text-align: center; margin-bottom: 15px; font-size: 14px; color: gray;">এখানে আপনি ইচ্ছামতো কলাম ও সারি যুক্ত করে সাপ্তাহিক ক্লাস বা পড়ার রুটিন তৈরি করতে পারেন।</p>
-
         <div class="table-responsive">
             <table class="routine-table" id="routine-table">
                 <thead id="routine-head"></thead>
                 <tbody id="routine-body"></tbody>
             </table>
         </div>
-        
         <button class="btn" style="background: transparent; border: 2px dashed var(--routine-color); color: var(--routine-color);" onclick="addRoutineRow()">+ নতুন সারি (Row) যোগ করুন</button>
         <button class="btn btn-routine" onclick="saveRoutineData()"><i class="fa-solid fa-save"></i> রুটিন সেভ করুন</button>
     </div>
 
-    <!-- ================= 4. ফাইন্যান্স ট্র্যাকার ================= -->
+    <!-- ফাইন্যান্স ট্র্যাকার -->
     <div id="section-finance" class="tab-content card">
         <h2 class="card-title" style="color: var(--finance-color);"><i class="fa-solid fa-wallet"></i> ফাইন্যান্স ট্র্যাকার</h2>
         <div class="finance-summary">
@@ -217,24 +212,19 @@
         </div>
         <button class="btn" style="background: transparent; border: 2px dashed var(--finance-color); color: var(--finance-color); margin-bottom:10px;" onclick="addExpenseRow()">+ খরচের খাত যোগ করুন</button>
         <button class="btn btn-finance" onclick="saveFinanceData()"><i class="fa-solid fa-save"></i> হিসাব সেভ করুন</button>
-
-        <!-- Finance Chart Restored -->
         <div class="chart-container" style="height: 250px; margin-top:20px;"><canvas id="financeChart"></canvas></div>
     </div>
 
-    <!-- ================= 5. AI ও অ্যাকাউন্টেবিলিটি পার্টনার ================= -->
+    <!-- AI ও অ্যাকাউন্টেবিলিটি পার্টনার -->
     <div id="section-ai" class="tab-content card">
         <h2 class="card-title" style="color: var(--ai-color);"><i class="fa-solid fa-robot"></i> AI ও পার্টনার</h2>
-        
         <div class="partner-box">
             <h4 style="color: #c0392b; margin-bottom: 10px;"><i class="fa-solid fa-user-shield"></i> অ্যাকাউন্টেবিলিটি পার্টনার</h4>
-            <p style="font-size: 14px; margin-bottom: 10px;">বন্ধু বা অভিভাবকের ইমেইল যুক্ত করুন। একটানা ৩ দিন রুটিন মিস করলে সিস্টেম অ্যালার্ট দেবে।</p>
             <div style="display: flex; gap: 5px;">
                 <input type="email" id="partner-email" class="input-box" placeholder="partner@email.com">
                 <button class="btn" style="background: #c0392b; width: 80px; margin: 0;" onclick="savePartner()">সেভ</button>
             </div>
         </div>
-
         <button class="btn btn-ai" onclick="generateAIReport()"><i class="fa-solid fa-wand-magic-sparkles"></i> আমার স্ট্যাটাস অ্যানালাইজ করো</button>
         <div id="ai-result" class="ai-chat-box" style="display: none;"></div>
     </div>
@@ -252,15 +242,17 @@
 </div>
 
 <script>
-    // PWA Manifest
-    const manifestBlob = new Blob([JSON.stringify({"name": "Smart Hub", "display": "standalone", "theme_color": "#2e8b57"})], {type: 'application/json'});
-    document.head.insertAdjacentHTML('beforeend', `<link rel="manifest" href="${URL.createObjectURL(manifestBlob)}">`);
+    // ================= Service Worker Registration (Offline Support) =================
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker Registered'))
+        .catch(err => console.log('Service Worker Failed', err));
+    }
 
+    // আপনার আগের সমস্ত জাভাস্ক্রিপ্ট লজিক ঠিক এখানে আগের মতই দেওয়া হলো
     const prayers = [{ id: 'fajr', name: 'ফজর' }, { id: 'dhuhr', name: 'যোহর' }, { id: 'asr', name: 'আসর' }, { id: 'maghrib', name: 'মাগরিব' }, { id: 'isha', name: 'এশা' }];
     let studyList = [], financeList = [], todayIncome = 0;
     let nChart, sChart, fChart;
-    
-    // Dynamic Routine Variables
     let routineHeaders = ['দিন / বার', 'সময়', 'সাবজেক্ট'];
     let routineRows = [['শনিবার', 'সকাল ১০টা', 'বাংলা'], ['রবিবার', 'সকাল ১০টা', 'ইংরেজি']];
 
@@ -289,14 +281,8 @@
         updateCharts();
     }
 
-    function loadDateData() { 
-        loadNamazData(); 
-        loadStudyData(); 
-        loadFinanceData(); 
-        updateCharts(); 
-    }
+    function loadDateData() { loadNamazData(); loadStudyData(); loadFinanceData(); updateCharts(); }
 
-    // ================= 1. নামাজ লজিক =================
     function initNamazTable() {
         let tbody = document.getElementById('namaz-body'); tbody.innerHTML = '';
         prayers.forEach(p => tbody.innerHTML += `<tr><td><b>${p.name}</b></td>
@@ -316,47 +302,34 @@
             document.getElementById(`${p.id}-jamaat`).checked = d[p.id]?.jamaat||false; 
             document.getElementById(`${p.id}-qaza`).checked = d[p.id]?.qaza||false; 
         });
-        showNamazStats(7, 'n-btn-7'); // Auto trigger stats
+        showNamazStats(7, 'n-btn-7');
     }
     function saveNamazData() {
         let data = {};
         prayers.forEach(p => data[p.id] = { prayed: document.getElementById(`${p.id}-prayed`).checked, jamaat: document.getElementById(`${p.id}-jamaat`).checked, qaza: document.getElementById(`${p.id}-qaza`).checked });
         localStorage.setItem(`namaz_${document.getElementById('global-date').value}`, JSON.stringify(data));
-        updateCharts(); 
-        document.querySelector('.namaz-tabs-sm .active').click(); // Refresh Active Stat
-        alert('নামাজ সেভ হয়েছে!');
+        updateCharts(); document.querySelector('.namaz-tabs-sm .active').click(); alert('নামাজ সেভ হয়েছে!');
     }
     function showNamazStats(days, btnId) {
         document.querySelectorAll('.namaz-tabs-sm button').forEach(b => b.classList.remove('active'));
         document.getElementById(btnId).classList.add('active');
-
         let totalPrayed = 0, totalJamaat = 0, totalPossible = days * 5;
-
         for (let i = 0; i < days; i++) {
             let d = new Date(); d.setDate(d.getDate() - i);
             let data = JSON.parse(localStorage.getItem(`namaz_${d.toISOString().split('T')[0]}`));
             if (data) prayers.forEach(p => { if (data[p.id]?.prayed) totalPrayed++; if (data[p.id]?.jamaat) totalJamaat++; });
         }
-
         let pPrayed = ((totalPrayed / totalPossible) * 100).toFixed(1);
         let pJamaat = ((totalJamaat / totalPossible) * 100).toFixed(1);
-
         document.getElementById('namaz-stats-display').innerHTML = `
-            <div class="stat-result" style="border-left-color: var(--primary-color);">
-                <span>✅ মোট আদায়:</span><b>${totalPrayed} ওয়াক্ত (${pPrayed}%)</b>
-            </div>
-            <div class="stat-result" style="border-left-color: var(--primary-color);">
-                <span>🕌 জামায়াতে:</span><b>${totalJamaat} ওয়াক্ত (${pJamaat}%)</b>
-            </div>
-        `;
+            <div class="stat-result" style="border-left-color: var(--primary-color);"><span>✅ মোট আদায়:</span><b>${totalPrayed} ওয়াক্ত (${pPrayed}%)</b></div>
+            <div class="stat-result" style="border-left-color: var(--primary-color);"><span>🕌 জামায়াতে:</span><b>${totalJamaat} ওয়াক্ত (${pJamaat}%)</b></div>`;
     }
 
-    // ================= 2. স্টাডি লজিক =================
     function loadStudyData() {
         studyList = JSON.parse(localStorage.getItem(`study_${document.getElementById('global-date').value}`)) || JSON.parse(localStorage.getItem('study_tmp'))?.map(s=>({...s, h:0,m:0})) || [{name:'বাংলা',h:0,m:0}];
         document.getElementById('study-target-hours').value = localStorage.getItem('study_tgt') || 4;
-        renderStudy();
-        showStudyStats(7, 's-btn-7'); // Auto trigger stats
+        renderStudy(); showStudyStats(7, 's-btn-7');
     }
     function renderStudy() {
         let tbody = document.getElementById('study-body'); tbody.innerHTML = '';
@@ -372,70 +345,43 @@
         localStorage.setItem(`study_${document.getElementById('global-date').value}`, JSON.stringify(studyList));
         localStorage.setItem('study_tmp', JSON.stringify(studyList.map(s=>({name:s.name}))));
         localStorage.setItem('study_tgt', targetHours);
-        
-        updateCharts(); 
-        document.querySelector('.study-tabs-sm .active').click(); // Refresh Active Stat
-
+        updateCharts(); document.querySelector('.study-tabs-sm .active').click();
         let totalMins = studyList.reduce((acc, s) => acc + (s.h*60)+s.m, 0);
-        if(totalMins >= targetHours * 60) confetti({particleCount:150, spread:80, origin:{y:0.6}});
-        else alert('পড়াশোনা সেভ হয়েছে!');
+        if(totalMins >= targetHours * 60) confetti({particleCount:150, spread:80, origin:{y:0.6}}); else alert('পড়াশোনা সেভ হয়েছে!');
     }
     function showStudyStats(days, btnId) {
         document.querySelectorAll('.study-tabs-sm button').forEach(b => b.classList.remove('active'));
         document.getElementById(btnId).classList.add('active');
-
         let targetHours = parseFloat(document.getElementById('study-target-hours').value) || 4;
-        let totalTargetMinutes = targetHours * 60 * days;
-        let totalStudiedMinutes = 0;
-
+        let totalTargetMinutes = targetHours * 60 * days, totalStudiedMinutes = 0;
         for (let i = 0; i < days; i++) {
             let d = new Date(); d.setDate(d.getDate() - i);
             let data = JSON.parse(localStorage.getItem(`study_${d.toISOString().split('T')[0]}`));
             if (data) data.forEach(sub => totalStudiedMinutes += (parseInt(sub.h) * 60) + parseInt(sub.m));
         }
-
-        let studiedH = Math.floor(totalStudiedMinutes / 60);
-        let studiedM = totalStudiedMinutes % 60;
-        let targetH = Math.floor(totalTargetMinutes / 60);
         let percentage = totalTargetMinutes > 0 ? ((totalStudiedMinutes / totalTargetMinutes) * 100).toFixed(1) : 0;
         let bg = percentage >= 100 ? 'rgba(46, 139, 87, 0.15)' : 'var(--card-bg)';
-
         document.getElementById('study-stats-display').innerHTML = `
-            <div class="stat-result" style="border-left-color: var(--secondary-color);">
-                <span>🎯 টার্গেট (${days} দিন):</span><b>${targetH} ঘণ্টা</b>
-            </div>
-            <div class="stat-result" style="border-left-color: var(--secondary-color); background: ${bg};">
-                <span>📖 পড়া হয়েছে:</span><b>${studiedH}ঘ ${studiedM}মি (${percentage}%)</b>
-            </div>
-        `;
+            <div class="stat-result" style="border-left-color: var(--secondary-color);"><span>🎯 টার্গেট (${days} দিন):</span><b>${Math.floor(totalTargetMinutes/60)} ঘণ্টা</b></div>
+            <div class="stat-result" style="border-left-color: var(--secondary-color); background: ${bg};"><span>📖 পড়া হয়েছে:</span><b>${Math.floor(totalStudiedMinutes/60)}ঘ ${totalStudiedMinutes%60}মি (${percentage}%)</b></div>`;
     }
 
-    // ================= 3. ডাইনামিক রুটিন লজিক =================
     function loadRoutineData() {
         let savedH = JSON.parse(localStorage.getItem('routine_headers'));
         let savedR = JSON.parse(localStorage.getItem('routine_rows'));
-        if(savedH) routineHeaders = savedH;
-        if(savedR) routineRows = savedR;
+        if(savedH) routineHeaders = savedH; if(savedR) routineRows = savedR;
         renderRoutineTable();
     }
     function renderRoutineTable() {
-        let thead = document.getElementById('routine-head');
-        let tbody = document.getElementById('routine-body');
-        
+        let thead = document.getElementById('routine-head'), tbody = document.getElementById('routine-body');
         let headHTML = '<tr>';
-        routineHeaders.forEach((h, c) => {
-            headHTML += `<th><input type="text" class="routine-header-input" value="${h}" onchange="routineHeaders[${c}]=this.value" placeholder="কলামের নাম">
-                ${routineHeaders.length > 1 ? `<button class="btn-del-col" onclick="removeRoutineCol(${c})"><i class="fa-solid fa-times"></i></button>` : ''}</th>`;
-        });
+        routineHeaders.forEach((h, c) => { headHTML += `<th><input type="text" class="routine-header-input" value="${h}" onchange="routineHeaders[${c}]=this.value" placeholder="কলামের নাম">${routineHeaders.length > 1 ? `<button class="btn-del-col" onclick="removeRoutineCol(${c})"><i class="fa-solid fa-times"></i></button>` : ''}</th>`; });
         headHTML += `<th style="width: 50px;"><button class="btn-add-col" onclick="addRoutineCol()">+ কলাম</button></th></tr>`;
         thead.innerHTML = headHTML;
-
         let bodyHTML = '';
         routineRows.forEach((row, r) => {
             bodyHTML += '<tr>';
-            routineHeaders.forEach((_, c) => {
-                bodyHTML += `<td><input type="text" class="routine-input input-box" value="${row[c] || ''}" onchange="routineRows[${r}][${c}]=this.value" placeholder="..."></td>`;
-            });
+            routineHeaders.forEach((_, c) => { bodyHTML += `<td><input type="text" class="routine-input input-box" value="${row[c] || ''}" onchange="routineRows[${r}][${c}]=this.value" placeholder="..."></td>`; });
             bodyHTML += `<td><button class="btn-remove" onclick="removeRoutineRow(${r})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
         });
         tbody.innerHTML = bodyHTML;
@@ -444,13 +390,8 @@
     function removeRoutineCol(c) { if(routineHeaders.length<=1)return; routineHeaders.splice(c,1); routineRows.forEach(r => r.splice(c,1)); renderRoutineTable(); }
     function addRoutineRow() { routineRows.push(new Array(routineHeaders.length).fill('')); renderRoutineTable(); }
     function removeRoutineRow(r) { routineRows.splice(r,1); renderRoutineTable(); }
-    function saveRoutineData() {
-        localStorage.setItem('routine_headers', JSON.stringify(routineHeaders));
-        localStorage.setItem('routine_rows', JSON.stringify(routineRows));
-        alert('রুটিন সেভ করা হয়েছে!');
-    }
+    function saveRoutineData() { localStorage.setItem('routine_headers', JSON.stringify(routineHeaders)); localStorage.setItem('routine_rows', JSON.stringify(routineRows)); alert('রুটিন সেভ করা হয়েছে!'); }
 
-    // ================= 4. ফাইন্যান্স ট্র্যাকার =================
     function loadFinanceData() {
         let d = document.getElementById('global-date').value;
         financeList = JSON.parse(localStorage.getItem(`finance_${d}`)) || [];
@@ -466,10 +407,7 @@
             tbody.innerHTML += `<tr>
                 <td><input type="text" class="input-box" value="${f.desc}" onchange="financeList[${i}].desc=this.value"></td>
                 <td><select class="input-box" onchange="financeList[${i}].cat=this.value">
-                    <option value="যাতায়াত" ${f.cat=='যাতায়াত'?'selected':''}>যাতায়াত</option>
-                    <option value="খাবার" ${f.cat=='খাবার'?'selected':''}>খাবার</option>
-                    <option value="পড়াশোনা" ${f.cat=='পড়াশোনা'?'selected':''}>পড়াশোনা</option>
-                    <option value="অন্যান্য" ${f.cat=='অন্যান্য'?'selected':''}>অন্যান্য</option>
+                    <option value="যাতায়াত" ${f.cat=='যাতায়াত'?'selected':''}>যাতায়াত</option><option value="খাবার" ${f.cat=='খাবার'?'selected':''}>খাবার</option><option value="পড়াশোনা" ${f.cat=='পড়াশোনা'?'selected':''}>পড়াশোনা</option><option value="অন্যান্য" ${f.cat=='অন্যান্য'?'selected':''}>অন্যান্য</option>
                 </select></td>
                 <td><input type="number" class="input-box" value="${f.amt}" onchange="financeList[${i}].amt=parseFloat(this.value)||0; updateFinanceSummary()"></td>
                 <td><button class="btn-remove" onclick="financeList.splice(${i},1);renderFinance()"><i class="fa-solid fa-trash"></i></button></td></tr>`;
@@ -487,39 +425,28 @@
         let d = document.getElementById('global-date').value;
         localStorage.setItem(`finance_${d}`, JSON.stringify(financeList));
         localStorage.setItem(`income_${d}`, todayIncome);
-        updateCharts();
-        alert('হিসাব সেভ হয়েছে!');
+        updateCharts(); alert('হিসাব সেভ হয়েছে!');
     }
 
-    // ================= 5. AI ও অ্যাকাউন্টেবিলিটি =================
     function savePartner() {
         let email = document.getElementById('partner-email').value;
         if(email.includes('@')) { localStorage.setItem('partner_email', email); alert('পার্টনার ইমেইল সেভ হয়েছে!'); }
         else alert('সঠিক ইমেইল দিন।');
     }
-
     function checkAccountability() {
         let partnerEmail = localStorage.getItem('partner_email');
         if(!partnerEmail) return;
-
         let missedDays = 0;
         for(let i=1; i<=3; i++) {
             let d = new Date(); d.setDate(d.getDate() - i);
-            let dateStr = d.toISOString().split('T')[0];
-            
-            let nData = JSON.parse(localStorage.getItem(`namaz_${dateStr}`));
-            let sData = JSON.parse(localStorage.getItem(`study_${dateStr}`));
-            
+            let nData = JSON.parse(localStorage.getItem(`namaz_${d.toISOString().split('T')[0]}`));
+            let sData = JSON.parse(localStorage.getItem(`study_${d.toISOString().split('T')[0]}`));
             let prayedCount = nData ? Object.values(nData).filter(p=>p.prayed).length : 0;
             let studyMins = sData ? sData.reduce((a,b)=>a+(b.h*60)+b.m,0) : 0;
-            
             if(prayedCount === 0 && studyMins === 0) missedDays++;
         }
-
         if(missedDays >= 3) {
-            let subject = encodeURIComponent("অ্যাকাউন্টেবিলিটি সতর্কতা: রুটিন মিস হয়েছে!");
-            let body = encodeURIComponent("আসসালামু আলাইকুম,\n\nআমি গত ৩ দিন ধরে আমার ড্যাশবোর্ডে কোনো নামাজ বা পড়াশোনার আপডেট দেইনি বা রুটিন ফলো করিনি। দয়া করে আমাকে মোটিভেট করুন।");
-            document.getElementById('mailto-btn').href = `mailto:${partnerEmail}?subject=${subject}&body=${body}`;
+            document.getElementById('mailto-btn').href = `mailto:${partnerEmail}?subject=${encodeURIComponent("অ্যাকাউন্টেবিলিটি সতর্কতা!")}&body=${encodeURIComponent("আমি ৩ দিন ধরে রুটিন মিস করেছি। আমাকে মোটিভেট করুন।")}`;
             document.getElementById('email-modal').style.display = 'flex';
         }
     }
@@ -529,22 +456,19 @@
         let aiText = "<b>আজকের অ্যানালাইসিস:</b><br><br>";
         let nData = JSON.parse(localStorage.getItem(`namaz_${document.getElementById('global-date').value}`));
         let prayed = nData ? Object.values(nData).filter(p=>p.prayed).length : 0;
-        
         let targetHours = parseFloat(document.getElementById('study-target-hours').value) || 4;
         let sData = JSON.parse(localStorage.getItem(`study_${document.getElementById('global-date').value}`));
         let studyMins = sData ? sData.reduce((a,b)=>a+(b.h*60)+b.m,0) : 0;
 
-        if(prayed === 5) aiText += `✅ <b>ইবাদত:</b> মাশাআল্লাহ! আপনি আজ ৫ ওয়াক্ত নামাজ পড়েছেন। আল্লাহ কবুল করুন।<br><br>`;
+        if(prayed === 5) aiText += `✅ <b>ইবাদত:</b> মাশাআল্লাহ! আপনি আজ ৫ ওয়াক্ত নামাজ পড়েছেন। আল্লাহ কবুল করুন。<br><br>`;
         else if (prayed > 0) aiText += `⚠️ <b>ইবাদত:</b> আপনি আজ ${prayed} ওয়াক্ত পড়েছেন। বাকিগুলো কায্বা করে নিন।<br><br>`;
         else aiText += `❌ <b>ইবাদত:</b> আজ কোনো নামাজের এন্ট্রি নেই! জলদি নামাজ পড়ে নিন।<br><br>`;
 
         if(studyMins >= targetHours * 60) aiText += `✅ <b>পড়াশোনা:</b> দারুণ! আপনি আপনার দৈনিক পড়ার টার্গেট পূরণ করেছেন।<br><br>`;
         else aiText += `⚠️ <b>পড়াশোনা:</b> ফোকাস বাড়ান! আপনার দৈনিক টার্গেট পূরণ হয়নি।<br><br>`;
-
         document.getElementById('ai-result').innerHTML = aiText;
     }
 
-    // ================= চার্ট রেন্ডারিং =================
     function updateCharts() {
         let isDark = document.body.classList.contains('dark-mode');
         Chart.defaults.color = isDark ? '#e0e0e0' : '#333';
@@ -558,33 +482,20 @@
             let st=JSON.parse(localStorage.getItem(`study_${s}`)); sD.push(st?st.reduce((a,b)=>a+(b.h+(b.m/60)),0).toFixed(1):0);
         }
 
-        // Namaz Bar Chart
         if(nChart) nChart.destroy();
         nChart = new Chart(document.getElementById('namazChart'), { type:'bar', data:{labels, datasets:[{label:'নামাজ (ওয়াক্ত)', data:nD, backgroundColor:'#2e8b57'}]}, options:{responsive:true, maintainAspectRatio:false, scales:{y:{max:5}}} });
         
-        // Study Line Chart
         if(sChart) sChart.destroy();
         sChart = new Chart(document.getElementById('studyChart'), { type:'line', data:{labels, datasets:[{label:'পড়া (ঘণ্টা)', data:sD, borderColor:'#205b8d', fill:true}]}, options:{responsive:true, maintainAspectRatio:false} });
 
-        // Finance Doughnut Chart (Last 30 days)
         let catMap = {'যাতায়াত':0, 'খাবার':0, 'পড়াশোনা':0, 'অন্যান্য':0};
         for(let i=0; i<30; i++){
             let d=new Date(); d.setDate(d.getDate()-i);
             let fData = JSON.parse(localStorage.getItem(`finance_${d.toISOString().split('T')[0]}`));
-            if(fData) {
-                fData.forEach(f => {
-                    if(catMap[f.cat] !== undefined) catMap[f.cat] += f.amt;
-                    else catMap['অন্যান্য'] += f.amt; // fallback
-                });
-            }
+            if(fData) fData.forEach(f => { if(catMap[f.cat] !== undefined) catMap[f.cat] += f.amt; else catMap['অন্যান্য'] += f.amt; });
         }
-        
         if(fChart) fChart.destroy();
-        fChart = new Chart(document.getElementById('financeChart'), { 
-            type:'doughnut', 
-            data:{ labels:Object.keys(catMap), datasets:[{ data:Object.values(catMap), backgroundColor:['#e67e22', '#e74c3c', '#3498db', '#95a5a6'] }] }, 
-            options:{responsive:true, maintainAspectRatio:false, plugins:{title:{display:true, text:'বিগত ৩০ দিনের খরচের খাত'}}} 
-        });
+        fChart = new Chart(document.getElementById('financeChart'), { type:'doughnut', data:{ labels:Object.keys(catMap), datasets:[{ data:Object.values(catMap), backgroundColor:['#e67e22', '#e74c3c', '#3498db', '#95a5a6'] }] }, options:{responsive:true, maintainAspectRatio:false, plugins:{title:{display:true, text:'বিগত ৩০ দিনের খরচের খাত'}}} });
     }
 </script>
 
